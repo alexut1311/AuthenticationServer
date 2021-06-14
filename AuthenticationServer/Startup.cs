@@ -7,6 +7,7 @@ using AuthenticationServer.DAL.Repositories.Classes;
 using AuthenticationServer.DAL.Repositories.Interfaces;
 using AuthenticationServer.Helpers.ControllerHelpers.Classes;
 using AuthenticationServer.Helpers.ControllerHelpers.Interfaces;
+using AuthenticationServer.Middlewares;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
@@ -32,7 +33,7 @@ namespace AuthenticationServer
          services.AddDbContext<ApplicationDBContext>(options => options.UseSqlServer(connectionString));
 
          services.AddTransient<IRoleLogic, RoleLogic>();
-         services.AddTransient<IUserLogic, UserLogic>();
+         services.AddScoped<IUserLogic, UserLogic>();
          services.AddTransient<IJWTokenManager, JWTokenManager>();
 
          services.AddTransient<IRoleRepository, RoleRepository>();
@@ -56,6 +57,8 @@ namespace AuthenticationServer
          app.UseRouting();
 
          app.UseAuthorization();
+
+         app.UseMiddleware<ValidateRefreshTokenMiddleware>();
 
          app.UseEndpoints(endpoints =>
          {

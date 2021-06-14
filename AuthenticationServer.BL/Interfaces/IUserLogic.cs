@@ -9,5 +9,7 @@ namespace AuthenticationServer.BL.Interfaces
       ApplicationResult AuthenticateUser(ApplicationUserDTO applicationUserDTO, string password);
       ApplicationUserDTO GetUserByEmail(string email);
       void AddUser(ApplicationUserDTO applicationUserDTO);
+      ApplicationUserDTO GetUserByRefreshToken(string refreshToken);
+      void ValidateUserRefreshTokens();
    }
 }

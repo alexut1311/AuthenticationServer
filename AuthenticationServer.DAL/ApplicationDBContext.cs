@@ -11,5 +11,6 @@ namespace AuthenticationServer.DAL
 
       public DbSet<ApplicationUser> Users { get; set; }
       public DbSet<ApplicationRole> Roles { get; set; }
+      public DbSet<UserRefreshToken> RefreshTokens { get; set; }
    }
 }

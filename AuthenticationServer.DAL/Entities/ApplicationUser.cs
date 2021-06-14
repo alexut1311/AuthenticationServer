@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace AuthenticationServer.DAL.Entities
@@ -20,5 +21,7 @@ namespace AuthenticationServer.DAL.Entities
       [ForeignKey("ApplicationRole")]
       public int RoleId { get; set; }
       public ApplicationRole ApplicationRole { get; set; }
+      public virtual ICollection<UserRefreshToken> Tokens { get; set; }
+
    }
 }

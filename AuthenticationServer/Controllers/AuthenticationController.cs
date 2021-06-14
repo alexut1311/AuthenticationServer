@@ -34,6 +34,25 @@ namespace AuthenticationServer.Controllers
          return StatusCode(result.StatusCode, result.Message);
       }
 
+      [HttpGet]
+      [Route("RefreshLogin")]
+      public ActionResult UserRefreshLogin(string refreshToken)
+      {
+         if (string.IsNullOrEmpty(refreshToken))
+         {
+            return BadRequest("Provide a refresh token.");
+         }
+
+         ApplicationUserDTO userDTO = _userLogic.GetUserByRefreshToken(refreshToken);
+         if (userDTO == null)
+         {
+            return BadRequest("No user found.");
+         }
+         ApplicationResult result = _userLogic.AuthenticateUser(userDTO, userDTO.Password);
+
+         return StatusCode(result.StatusCode, result.Message);
+      }
+
       [HttpPost]
       [Route("Register")]
       public ActionResult UserRegister([FromBody] ApplicationUserDTO applicationUserDTO)

@@ -1,4 +1,6 @@
-﻿namespace AuthenticationServer.TL.DTOs
+﻿using System.Collections.Generic;
+
+namespace AuthenticationServer.TL.DTOs
 {
    public class ApplicationUserDTO
    {
@@ -10,6 +12,8 @@
       public string Password { get; set; }
       public int RoleId { get; set; }
       public string RoleName { get; set; }
+      public string RefreshToken { get; set; }
+      public IEnumerable<UserRefreshTokenDTO> Tokens { get; set; }
 
    }
 }

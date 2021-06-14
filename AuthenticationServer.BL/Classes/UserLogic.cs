@@ -3,6 +3,10 @@ using AuthenticationServer.BL.Interfaces;
 using AuthenticationServer.DAL.Repositories.Interfaces;
 using AuthenticationServer.TL.DTOs;
 using AuthenticationServer.TL.Helper;
+using AuthenticationServer.TL.Helper.Classes;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace AuthenticationServer.BL.Classes
 {
@@ -42,6 +46,10 @@ namespace AuthenticationServer.BL.Classes
             };
          }
 
+         applicationUserDTO.RefreshToken = Guid.NewGuid().ToString();
+         DateTime expirationDate = DateTime.Now.AddDays(1);
+         _userRepository.SaveUserRefreshToken(applicationUserDTO.UserId, applicationUserDTO.RefreshToken, expirationDate);
+
          return new ApplicationResult
          {
             StatusCode = 200,
@@ -57,6 +65,34 @@ namespace AuthenticationServer.BL.Classes
       public void AddUser(ApplicationUserDTO applicationUserDTO)
       {
          _userRepository.AddUser(applicationUserDTO);
+      }
+
+      public ApplicationUserDTO GetUserByRefreshToken(string refreshToken)
+      {
+         ApplicationUserDTO userDto = _userRepository.GetUserByRefreshToken(refreshToken);
+         if (userDto == null)
+         {
+            return null;
+         }
+
+         if (!ClassHelper.CheckValidDate(userDto.Tokens.FirstOrDefault(x => x.RefreshToken == refreshToken).ExpirationDate))
+         {
+            return null;
+         }
+
+         return userDto;
+      }
+
+      public void ValidateUserRefreshTokens()
+      {
+         List<UserRefreshTokenDTO> userRefreshTokens = _userRepository.GetAllUserRefreshTokens();
+         foreach (UserRefreshTokenDTO token in userRefreshTokens)
+         {
+            if (!ClassHelper.CheckValidDate(token.ExpirationDate))
+            {
+               _userRepository.RemoveUserRefreshToken(token);
+            }
+         }
       }
    }
 }

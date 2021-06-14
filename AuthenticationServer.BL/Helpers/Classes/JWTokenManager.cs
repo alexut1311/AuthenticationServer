@@ -20,6 +20,7 @@ namespace AuthenticationServer.BL.Helpers.Classes
             { "LastName", userDTO.LastName },
             { "Username", userDTO.Username },
             { "Email", userDTO.Email },
+            { "RefreshToken", userDTO.RefreshToken },
          };
 
          JWTokenDTO jwtokenDTO = ConfigurationHelper.GetJWTokenSettings();
