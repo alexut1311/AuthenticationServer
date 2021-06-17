@@ -32,6 +32,7 @@ namespace AuthenticationServer.BL.Classes
          {
             return new ApplicationResult
             {
+               IsCompletedSuccesfully = false,
                StatusCode = 404,
                Message = "User not found.",
             };
@@ -41,6 +42,7 @@ namespace AuthenticationServer.BL.Classes
          {
             return new ApplicationResult
             {
+               IsCompletedSuccesfully = false,
                StatusCode = 401,
                Message = "Incorrect username or password.",
             };
@@ -52,6 +54,7 @@ namespace AuthenticationServer.BL.Classes
 
          return new ApplicationResult
          {
+            IsCompletedSuccesfully = true,
             StatusCode = 200,
             Message = _jWTokenManager.GenerateJWToken(applicationUserDTO),
          };

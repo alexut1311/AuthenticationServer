@@ -31,6 +31,11 @@ namespace AuthenticationServer.Controllers
          ApplicationUserDTO userDTO = _userLogic.GetUserByUsername(username);
          ApplicationResult result = _userLogic.AuthenticateUser(userDTO, password);
 
+         if (result.IsCompletedSuccesfully)
+         {
+            return Ok(result);
+         }
+
          return StatusCode(result.StatusCode, result.Message);
       }
 
@@ -49,6 +54,11 @@ namespace AuthenticationServer.Controllers
             return BadRequest("No user found.");
          }
          ApplicationResult result = _userLogic.AuthenticateUser(userDTO, userDTO.Password);
+
+         if (result.IsCompletedSuccesfully)
+         {
+            return Ok(result);
+         }
 
          return StatusCode(result.StatusCode, result.Message);
       }
