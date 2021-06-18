@@ -75,7 +75,7 @@ namespace AuthenticationServer.Controllers
 
          _userLogic.AddUser(applicationUserDTO);
 
-         return Ok(validateDTO.Message);
+         return Ok(validateDTO);
       }
    }
 }

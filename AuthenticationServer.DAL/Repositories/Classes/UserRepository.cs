@@ -26,6 +26,7 @@ namespace AuthenticationServer.DAL.Repositories.Classes
             Email = applicationUserDTO.Email,
             Password = applicationUserDTO.Password,
             RoleId = applicationUserDTO.RoleId,
+            UserBucketName = applicationUserDTO.UserBucketName,
          };
          _applicationDBContext.Users.Add(newUser);
          _applicationDBContext.SaveChanges();

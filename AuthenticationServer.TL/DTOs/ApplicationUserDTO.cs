@@ -13,6 +13,7 @@ namespace AuthenticationServer.TL.DTOs
       public int RoleId { get; set; }
       public string RoleName { get; set; }
       public string RefreshToken { get; set; }
+      public string UserBucketName { get; set; }
       public IEnumerable<UserRefreshTokenDTO> Tokens { get; set; }
 
    }

@@ -18,10 +18,11 @@ namespace AuthenticationServer.DAL.Entities
       public string Email { get; set; }
       [Required]
       public string Password { get; set; }
+      [Required]
+      public string UserBucketName { get; set; }
       [ForeignKey("ApplicationRole")]
       public int RoleId { get; set; }
       public ApplicationRole ApplicationRole { get; set; }
       public virtual ICollection<UserRefreshToken> Tokens { get; set; }
-
    }
 }
