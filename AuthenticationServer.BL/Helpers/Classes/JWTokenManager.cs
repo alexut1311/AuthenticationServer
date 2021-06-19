@@ -20,6 +20,7 @@ namespace AuthenticationServer.BL.Helpers.Classes
             { "LastName", userDTO.LastName },
             { "Username", userDTO.Username },
             { "Email", userDTO.Email },
+            { "UserBucketName", userDTO.UserBucketName },
             { "RefreshToken", userDTO.RefreshToken },
          };
 

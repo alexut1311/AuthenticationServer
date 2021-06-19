@@ -85,6 +85,7 @@ namespace AuthenticationServer.DAL.Repositories.Classes
             Email = userRefreshTokenDb.ApplicationUser.Email,
             Password = userRefreshTokenDb.ApplicationUser.Password,
             RoleId = userRefreshTokenDb.ApplicationUser.RoleId,
+            UserBucketName = userRefreshTokenDb.ApplicationUser.UserBucketName,
             RoleName = _applicationDBContext.Roles.FirstOrDefault(x => x.Id == userRefreshTokenDb.ApplicationUser.RoleId).RoleName
          };
          UserRefreshTokenDTO userRefreshTokenDto = new UserRefreshTokenDTO
@@ -117,6 +118,7 @@ namespace AuthenticationServer.DAL.Repositories.Classes
             Email = userFromDb.Email,
             Password = userFromDb.Password,
             RoleId = userFromDb.RoleId,
+            UserBucketName = userFromDb.UserBucketName,
             RoleName = userFromDb.ApplicationRole.RoleName
          };
       }

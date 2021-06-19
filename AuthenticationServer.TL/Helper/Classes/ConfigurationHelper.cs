@@ -25,7 +25,7 @@ namespace AuthenticationServer.TL.Helper.Classes
             {
                switch (key)
                {
-                  case "ExpirationDays":
+                  case "ExpirationMinutes":
                      if (!int.TryParse(jWTokensettings[key], out expirationMinutes))
                      {
                         throw new ArgumentException("Invalid key value.");
